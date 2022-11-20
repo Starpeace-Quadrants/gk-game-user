@@ -1,0 +1,28 @@
+version: "3.9"
+services:
+  app:
+    build:
+      dockerfile: Dockerfile
+      context: .
+      target: dev
+    volumes:
+      - .:/opt/app/api
+    environment:
+      MONGO_SERVER_ADDR: ":27017"
+    ports:
+      - "3000:3000"
+    networks:
+      - kafka_network
+  mongo-user:
+    container_name: mongo-user
+    image: mongo
+    volumes:
+      - ./data:/data/db
+    ports:
+      - "27017:27017"
+    networks:
+      - kafka_network
+networks:
+  kafka_network:
+    name: kafka_test_network
+
