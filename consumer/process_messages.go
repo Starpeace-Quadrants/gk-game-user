@@ -5,11 +5,10 @@ import (
 	kafka "github.com/ronappleton/gk-kafka"
 	"github.com/ronappleton/gk-kafka/storage"
 	"github.com/ronappleton/gk-message-transport"
-	"go.mongodb.org/mongo-driver/mongo"
 	"time"
 )
 
-func ProcessMessage(event event.Event, db *mongo.Client) {
+func ProcessMessage(event event.Event) {
 	data := storage.New()
 	data.Populate(event.Data())
 
